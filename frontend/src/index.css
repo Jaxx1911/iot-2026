@@ -1,0 +1,274 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #0f1117;
+  --surface: #1a1d27;
+  --surface-2: #232733;
+  --border: #2e3240;
+  --text: #e4e6ef;
+  --text-dim: #8b8fa3;
+  --accent: #3b82f6;
+  --green: #22c55e;
+  --yellow: #eab308;
+  --red: #ef4444;
+  --orange: #f97316;
+  --radius: 12px;
+}
+
+body {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+#root {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.75rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.header-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2s infinite;
+}
+
+.status-dot.offline {
+  background: var(--red);
+  animation: none;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.card-value {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 4px 0;
+}
+
+.card-label {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.card-value.green {
+  color: var(--green);
+}
+.card-value.yellow {
+  color: var(--yellow);
+}
+.card-value.red {
+  color: var(--red);
+}
+.card-value.blue {
+  color: var(--accent);
+}
+
+.chart-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+}
+
+.alert-list {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.alert-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+  background: var(--surface-2);
+}
+
+.alert-item.critical {
+  border-left: 3px solid var(--red);
+}
+
+.alert-item.warning {
+  border-left: 3px solid var(--yellow);
+}
+
+.alert-time {
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.control-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn:hover {
+  background: var(--border);
+}
+
+.btn.danger {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+.btn.danger:hover {
+  background: var(--red);
+  color: white;
+}
+
+.btn.success {
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.btn.success:hover {
+  background: var(--green);
+  color: white;
+}
+
+.cell-bar-group {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  height: 140px;
+  padding-top: 8px;
+}
+
+.cell-bar-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  gap: 6px;
+}
+
+.cell-bar {
+  width: 100%;
+  max-width: 60px;
+  border-radius: 6px 6px 0 0;
+  background: var(--accent);
+  transition: height 0.5s ease;
+}
+
+.cell-bar.warn {
+  background: var(--yellow);
+}
+
+.cell-bar.danger {
+  background: var(--red);
+}
+
+.cell-voltage-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.cell-name {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+}
+
+.no-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
