@@ -1,0 +1,12 @@
+./frontend/node_modules
+./backend/venv
+./firmware/flood_gate/build
+./firmware/flood_gate/src
+./firmware/flood_gate/src/config.h
+./firmware/flood_gate/src/main.cpp
+./firmware/flood_gate/src/sensors.h
+./firmware/flood_gate/src/sensors.cpp
+./firmware/flood_gate/src/relay_control.h
+./firmware/flood_gate/src/relay_control.cpp
+./firmware/flood_gate/src/mqtt_handler.h
+./firmware/flood_gate/src/mqtt_handler.cpp
