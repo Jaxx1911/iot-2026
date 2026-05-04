@@ -1,0 +1,9 @@
+# WiFi / MQTT — không commit
+secrets.h
+
+# Arduino / IDE
+build/
+*.hex
+*.elf
+.vscode/
+*.code-workspace
