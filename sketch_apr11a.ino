@@ -47,6 +47,11 @@ void setup() {
   ina219.setCalibration_16V_400mA();
 
   sensors.begin();
+  Serial.print("DS18B20 devices: ");
+  Serial.println(sensors.getDeviceCount());
+  if (sensors.getDeviceCount() == 0) {
+    Serial.println("DS18B20: none (check GPIO4, GND, 3V3, 4k7 pull-up DQ->3V3)");
+  }
 
   lcd.init();
   lcd.backlight();
@@ -85,7 +90,9 @@ void loop() {
   const bool stopChargeWarn = relayUpdateOutput();
 
   batteryProcessPercentSlew(percentTarget, loopMs);
-  batteryProcessTempEma(tempC);
+  if (tempValid) {
+    batteryProcessTempEma(tempC);
+  }
 
   int modeNow = ui_modeFromCurrent(raw_mA);
   if (modeNow == g_modeLastSample) {
@@ -129,7 +136,11 @@ void loop() {
   Serial.print(" | I=");
   Serial.print(current, 1);
   Serial.print("mA T=");
-  Serial.print(tempC, 1);
+  if (tempValid) {
+    Serial.print(tempC, 1);
+  } else {
+    Serial.print("---");
+  }
   Serial.print("C P%=");
   Serial.print(g_percentDisp, 1);
   if (stopChargeWarn) {
@@ -146,7 +157,7 @@ void loop() {
   mqttClient.loop();
   publishTelemetry();
 
-  ui_render(g_percentDisp, current, g_tempDisp, g_modeDisplay, stopChargeWarn);
+  ui_render(g_percentDisp, current, g_tempDisp, g_modeDisplay, stopChargeWarn, tempValid);
 
   delay(loopMs);
 }

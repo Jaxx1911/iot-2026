@@ -33,7 +33,8 @@ const char *ui_modeLabel(int m) {
   }
 }
 
-void ui_render(float percent, float current, float tempDisp, int modeDisplay, bool stopChargeWarn) {
+void ui_render(float percent, float current, float tempDisp, int modeDisplay, bool stopChargeWarn,
+               bool tempValid) {
   lcd.setCursor(0, 0);
   lcd.print("P:");
   ui_lcdPrintFloatOneDecimal(percent);
@@ -53,7 +54,11 @@ void ui_render(float percent, float current, float tempDisp, int modeDisplay, bo
   } else {
     lcd.print(ui_modeLabel(modeDisplay));
     lcd.print(" ");
-    ui_lcdPrintFloatOneDecimal(tempDisp);
-    lcd.print("C   ");
+    if (tempValid) {
+      ui_lcdPrintFloatOneDecimal(tempDisp);
+      lcd.print("C   ");
+    } else {
+      lcd.print("--.-C         ");
+    }
   }
 }
